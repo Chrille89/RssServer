@@ -33,7 +33,12 @@ public abstract class RSSReader {
 				SyndFeedInput input = new SyndFeedInput();
 		        SyndFeed feed = input.build(source);
 		        List<SyndEntryImpl> entries = feed.getEntries();
-		        entries.forEach(feedEntry -> feedList.add(new Feed(feedEntry.getTitle(),feedEntry.getDescription().getValue(),feedEntry.getLink())));	  
+		        
+		        entries.forEach(feedEntry -> feedList.add(new Feed(feedEntry.getTitle(),
+		        		feedEntry.getDescription().getValue().substring(0, feedEntry.getDescription().getValue().indexOf("(")),
+		        		feedEntry.getLink(),
+		        		"")));	  
+		        System.out.println(feedList); 
 	            return feedList;
 			} catch (MalformedURLException e) {
 				//logger.log(LogLevel.WARN,"Cannot parse RSS-Document! Wrong URL! "+ExceptionUtils.exceptionStackTraceAsString(e));

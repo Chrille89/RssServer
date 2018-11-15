@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.xml.sax.InputSource;
 
+import com.sun.syndication.feed.synd.SyndContentImpl;
 import com.sun.syndication.feed.synd.SyndEntryImpl;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.FeedException;
@@ -32,7 +33,16 @@ public class GolemRSSReader extends RSSReader {
 				SyndFeedInput input = new SyndFeedInput();
 		        SyndFeed feed = input.build(source);
 		        List<SyndEntryImpl> entries = feed.getEntries();
-		        entries.forEach(feedEntry -> feedList.add(new Feed(feedEntry.getTitle(),feedEntry.getDescription().getValue().substring(0, feedEntry.getDescription().getValue().indexOf("(")),feedEntry.getLink())));	  
+		        entries.forEach(feedEntry -> {
+		        	SyndContentImpl content = (SyndContentImpl) feedEntry.getContents().get(0);
+		        	String pictureUrl= content.getValue().split("\"")[1];
+		        	feedList.add(new Feed(feedEntry.getTitle(),
+		        			              feedEntry.getDescription().getValue().substring(0, feedEntry.getDescription().getValue().indexOf("(")),
+	        		feedEntry.getLink(),
+	        		pictureUrl));
+		        });
+		        		
+		        System.out.println(feedList);
 	            return feedList;
 			} catch (MalformedURLException e) {
 				//logger.log(LogLevel.WARN,"Cannot parse RSS-Document! Wrong URL! "+ExceptionUtils.exceptionStackTraceAsString(e));

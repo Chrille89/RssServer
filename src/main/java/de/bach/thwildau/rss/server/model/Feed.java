@@ -5,11 +5,13 @@ public class Feed {
 	private String title;
 	private String description;
 	private String link;
+	private String pictureUrl;
 	
-	public Feed(String title, String description, String link) {
+	public Feed(String title, String description, String link, String pictureUrl) {
 		this.title = title;
 		this.description = description;
 		this.link = link;
+		this.pictureUrl = pictureUrl;
 	}
 	
 	public String getTitle() {
@@ -30,4 +32,19 @@ public class Feed {
 	public void setLink(String link) {
 		this.link = link;
 	}
+
+	public String getPictureUrl() {
+		return pictureUrl;
+	}
+
+	public void setPictureUrl(String pictureUrl) {
+		this.pictureUrl = pictureUrl;
+	}
+
+	@Override
+	public String toString() {
+		return "Title: "+getTitle()+"; Description: "+getDescription()+"; PictureUrl: "+getPictureUrl()+"; Link: "+getLink();
+	}
+	
+	
 }
