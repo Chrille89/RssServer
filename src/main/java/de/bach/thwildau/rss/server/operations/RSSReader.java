@@ -35,7 +35,7 @@ public abstract class RSSReader {
 		        List<SyndEntryImpl> entries = feed.getEntries();
 		        
 		        entries.forEach(feedEntry -> feedList.add(new Feed(feedEntry.getTitle(),
-		        		feedEntry.getDescription().getValue().substring(0, feedEntry.getDescription().getValue().indexOf("(")),
+		        		feedEntry.getDescription().getValue(),
 		        		feedEntry.getLink(),
 		        		"")));	  
 		        System.out.println(feedList); 
