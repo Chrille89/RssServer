@@ -3,5 +3,6 @@
 /Users/christian/git/RssServer/src/main/java/de/bach/thwildau/rss/server/RssServer/RssServerApplication.java
 /Users/christian/git/RssServer/src/main/java/de/bach/thwildau/rss/server/model/Feed.java
 /Users/christian/git/RssServer/src/main/java/de/bach/thwildau/rss/server/operations/TagesschauNews.java
+/Users/christian/git/RssServer/src/main/java/de/bach/thwildau/rss/server/operations/HeiseRSSReader.java
 /Users/christian/git/RssServer/src/main/java/de/bach/thwildau/rss/server/operations/RSSReader.java
 /Users/christian/git/RssServer/src/main/java/de/bach/thwildau/rss/server/operations/InsecureHostnameVerifier.java
