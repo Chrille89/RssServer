@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.xml.sax.InputSource;
@@ -18,42 +18,59 @@ import com.sun.syndication.io.SyndFeedInput;
 import de.bach.thwildau.rss.server.model.Feed;
 
 public class TagesschauNews extends RSSReader {
-	
-	 public TagesschauNews(String url) {
+
+	private static final String tagesschauRSSFeed = "http://www.tagesschau.de/xml/rss2";
+	private static RSSReader uniqueInstance;
+
+	private TagesschauNews(String url) {
 		super(url);
 	}
-	 
-	@Override
-	public List<Feed> loadRSSFeeds() {
-		// TODO Auto-generated method stub
-		List<Feed> feedList = new ArrayList<>();	
-		try {
-		        InputStream is = new URL(this.feedUrlString).openConnection().getInputStream();
-		        InputSource source = new InputSource(is);
-		        
-				SyndFeedInput input = new SyndFeedInput();
-		        SyndFeed feed = input.build(source);
-		        List<SyndEntryImpl> entries = feed.getEntries();
-		        
-		        entries.forEach(feedEntry -> {
-		        	SyndContentImpl content = (SyndContentImpl) feedEntry.getContents().get(0);
-		        	String pictureUrl= content.getValue().split("\"")[3];
-		        	feedList.add(new Feed(feedEntry.getTitle(),
-			        		feedEntry.getDescription().getValue(),
-			        		feedEntry.getLink(),
-			        		pictureUrl));	  
-		        });
-		        System.out.println(feedList); 
-	            return feedList;
-			} catch (MalformedURLException e) {
-				//logger.log(LogLevel.WARN,"Cannot parse RSS-Document! Wrong URL! "+ExceptionUtils.exceptionStackTraceAsString(e));
-			} catch (IllegalArgumentException e) {
-			//	logger.log(LogLevel.WARN,"Cannot parse RSS-Document! Illegal Argument! "+ExceptionUtils.exceptionStackTraceAsString(e));
-			} catch (FeedException e) {
-			//	logger.log(LogLevel.WARN,"Cannot parse RSS-Document! "+ExceptionUtils.exceptionStackTraceAsString(e));
-			} catch (IOException e) {
-			//	logger.log(LogLevel.WARN,"I/O-Error! "+ExceptionUtils.exceptionStackTraceAsString(e));
-			}
-			return feedList;
+
+	public static RSSReader getInstance() {
+		if (uniqueInstance == null) {
+			uniqueInstance = new TagesschauNews(tagesschauRSSFeed);
+		}
+		return uniqueInstance;
 	}
+
+	@Override
+	protected void loadRSSFeeds() {
+		// TODO Auto-generated method stub
+		try {
+			System.out.println("loadRSSFeeds()");
+			startDate = new Date();
+			feedList.clear();
+			InputStream is = new URL(this.feedUrlString).openConnection().getInputStream();
+			InputSource source = new InputSource(is);
+
+			SyndFeedInput input = new SyndFeedInput();
+			SyndFeed feed = input.build(source);
+			List<SyndEntryImpl> entries = feed.getEntries();
+
+			entries.forEach(feedEntry -> {
+				SyndContentImpl content = (SyndContentImpl) feedEntry.getContents().get(0);
+				String pictureUrl = content.getValue().split("\"")[3];
+				feedList.add(new Feed(feedEntry.getTitle(), feedEntry.getDescription().getValue(), feedEntry.getLink(),
+						pictureUrl));
+			});
+
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (FeedException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public List<Feed> getFeedList() {
+		if (!getFromCache()) {
+			this.loadRSSFeeds();
+		}
+		return feedList;
+	}
+
 }

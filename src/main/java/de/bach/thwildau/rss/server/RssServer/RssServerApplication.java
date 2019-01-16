@@ -18,30 +18,29 @@ import de.bach.thwildau.rss.server.operations.TagesschauNews;
 @EnableAutoConfiguration
 @SpringBootConfiguration
 public class RssServerApplication {
-	
-	private static final String golemRSSFeed = "https://rss.golem.de/rss.php?feed=RSS2.0";
-	private static final String tagesschauRSSFeed = "http://www.tagesschau.de/xml/rss2";
-	
+
 	@RequestMapping("/")
 	@ResponseBody
 	public String test() {
 		return "Hallo Welt";
 	}
-	
+
 	@RequestMapping("/tagesschaunews")
 	@ResponseBody
 	public List<Feed> getTagesschauNews() {
-		RSSReader news = new TagesschauNews(tagesschauRSSFeed);
-		return news.loadRSSFeeds();
+		System.out.println("Call /tagesschaunews");
+		RSSReader news = TagesschauNews.getInstance();
+		return news.getFeedList();
 	}
-	
+
 	@RequestMapping("/golemnews")
 	@ResponseBody
 	public List<Feed> getGolemNews() {
-		RSSReader news = new GolemRSSReader(golemRSSFeed);
-		return news.loadRSSFeeds();
+		System.out.println("Call /golemnews");
+		RSSReader news = GolemRSSReader.getInstance();
+		return news.getFeedList();
 	}
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(RssServerApplication.class, args);
 	}
