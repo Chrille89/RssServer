@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -29,12 +30,14 @@ public class RssServerApplication extends SpringBootServletInitializer {
         return application.sources(RssServerApplication.class);
     }
 
+	@CrossOrigin
 	@RequestMapping("/")
 	@ResponseBody
 	public String test() {
 		return "Hallo Welt";
 	}
 
+	@CrossOrigin
 	@RequestMapping("/golem")
 	@ResponseBody
 	public List<Feed> getGolemNews() {
@@ -43,6 +46,7 @@ public class RssServerApplication extends SpringBootServletInitializer {
 		return news.getFeedList();
 	}
 	
+	@CrossOrigin
 	@RequestMapping("/heise")
 	@ResponseBody
 	public List<Feed> getHeiseNews() {
@@ -51,6 +55,7 @@ public class RssServerApplication extends SpringBootServletInitializer {
 		return news.getFeedList();
 	}
 	
+	@CrossOrigin
 	@RequestMapping("/tagesschau")
 	@ResponseBody
 	public List<Feed> getTagesschauNews() {
