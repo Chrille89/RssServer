@@ -1,0 +1,8 @@
+de/bach/thwildau/rss/server/operations/RSSReader.class
+de/bach/thwildau/rss/server/operations/TagesschauNews.class
+de/bach/thwildau/rss/server/operations/InsecureTrustManager.class
+de/bach/thwildau/rss/server/RssServer/RssServerApplication.class
+de/bach/thwildau/rss/server/model/Feed.class
+de/bach/thwildau/rss/server/operations/InsecureHostnameVerifier.class
+de/bach/thwildau/rss/server/operations/HeiseRSSReader.class
+de/bach/thwildau/rss/server/operations/GolemRSSReader.class
