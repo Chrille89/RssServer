@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import de.bach.thwildau.rss.server.model.Feed;
+import de.bach.thwildau.rss.server.operations.GameStarRSSReader;
 import de.bach.thwildau.rss.server.operations.GolemRSSReader;
 import de.bach.thwildau.rss.server.operations.HeiseRSSReader;
 import de.bach.thwildau.rss.server.operations.RSSReader;
@@ -26,9 +27,9 @@ import de.bach.thwildau.rss.server.operations.TagesschauNews;
 public class RssServerApplication extends SpringBootServletInitializer {
 
 	@Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(RssServerApplication.class);
-    }
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(RssServerApplication.class);
+	}
 
 	@CrossOrigin
 	@RequestMapping("/")
@@ -45,7 +46,7 @@ public class RssServerApplication extends SpringBootServletInitializer {
 		RSSReader news = GolemRSSReader.getInstance();
 		return news.getFeedList();
 	}
-	
+
 	@CrossOrigin
 	@RequestMapping("/heise")
 	@ResponseBody
@@ -54,7 +55,16 @@ public class RssServerApplication extends SpringBootServletInitializer {
 		RSSReader news = HeiseRSSReader.getInstance();
 		return news.getFeedList();
 	}
-	
+
+	@CrossOrigin
+	@RequestMapping("/gamestar")
+	@ResponseBody
+	public List<Feed> getCtNews() {
+		System.out.println("Call /ct");
+		RSSReader news = GameStarRSSReader.getInstance();
+		return news.getFeedList();
+	}
+
 	@CrossOrigin
 	@RequestMapping("/tagesschau")
 	@ResponseBody

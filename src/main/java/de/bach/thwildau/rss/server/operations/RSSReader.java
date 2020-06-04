@@ -10,6 +10,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.xml.sax.InputSource;
 
+import com.sun.syndication.feed.synd.SyndContentImpl;
 import com.sun.syndication.feed.synd.SyndEntryImpl;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.FeedException;
@@ -41,8 +42,30 @@ public abstract class RSSReader {
 			SyndFeed feed = input.build(source);
 			List<SyndEntryImpl> entries = feed.getEntries();
 
-			entries.forEach(feedEntry -> feedList.add(
-					new Feed(feedEntry.getTitle(), feedEntry.getDescription().getValue(), feedEntry.getLink(), "")));
+			entries.forEach(feedEntry -> {
+				String title = feedEntry.getTitle();
+				String description = feedEntry.getDescription().getValue();
+				String link = feedEntry.getLink();
+
+				String pictureUrl = "";
+				String contentValue = "";
+
+				if (!feedEntry.getContents().isEmpty()) {
+					SyndContentImpl content = (SyndContentImpl) feedEntry.getContents().get(0);
+					contentValue = content.getValue();
+				}
+
+				if (description.contains("img")) {
+					pictureUrl = getImageFromDescription(description);
+					description = description.substring(description.indexOf("</a>") + 5);
+					description = description.trim();
+				} else if (contentValue.contains("img")) {
+					pictureUrl = getImageFromContentValue(contentValue);
+
+				}
+
+				feedList.add(new Feed(title, description, link, pictureUrl));
+			});
 
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
@@ -53,6 +76,35 @@ public abstract class RSSReader {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private String getImageFromContentValue(String contentValue) {
+		String ending = "";
+		if (contentValue.contains("jpeg")) {
+			ending = "jpeg";
+		} else if (contentValue.contains("jpg")) {
+			ending = "jpg";
+		} else if (contentValue.contains("png")) {
+			ending = "png";
+		} else {
+			throw new IndexOutOfBoundsException("Could not found image ending for contentValue: " + contentValue);
+		}
+		return contentValue.substring(contentValue.indexOf("src=") + 5, contentValue.indexOf(ending) + ending.length());
+
+	}
+
+	private String getImageFromDescription(String description) {
+		String ending = "";
+		if (description.contains("jpeg")) {
+			ending = "jpeg";
+		} else if (description.contains("jpg")) {
+			ending = "jpg";
+		} else if (description.contains("png")) {
+			ending = "png";
+		} else {
+			throw new IndexOutOfBoundsException("Could not found image ending for contentValue: " + description);
+		}
+		return description.substring(description.indexOf("src=") + 5, description.indexOf(ending) + ending.length());
 	}
 
 	protected boolean getFromCache() {

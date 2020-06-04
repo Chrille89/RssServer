@@ -35,34 +35,8 @@ public class TagesschauNews extends RSSReader {
 
 	@Override
 	protected void loadRSSFeeds() {
-		// TODO Auto-generated method stub
-		try {
-			System.out.println("loadRSSFeeds()");
-			startDate = new Date();
-			feedList.clear();
-			InputStream is = new URL(this.feedUrlString).openConnection().getInputStream();
-			InputSource source = new InputSource(is);
+		super.loadRSSFeeds();
 
-			SyndFeedInput input = new SyndFeedInput();
-			SyndFeed feed = input.build(source);
-			List<SyndEntryImpl> entries = feed.getEntries();
-
-			entries.forEach(feedEntry -> {
-				SyndContentImpl content = (SyndContentImpl) feedEntry.getContents().get(0);
-				String pictureUrl = content.getValue().split("\"")[3];
-				feedList.add(new Feed(feedEntry.getTitle(), feedEntry.getDescription().getValue(), feedEntry.getLink(),
-						pictureUrl));
-			});
-
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (FeedException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 
 	@Override
@@ -72,5 +46,4 @@ public class TagesschauNews extends RSSReader {
 		}
 		return feedList;
 	}
-
 }

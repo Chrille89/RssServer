@@ -17,18 +17,18 @@ import com.sun.syndication.io.SyndFeedInput;
 
 import de.bach.thwildau.rss.server.model.Feed;
 
-public class HeiseRSSReader extends RSSReader {
+public class GameStarRSSReader extends RSSReader {
 
-	private static final String heiseRSSFeed = "https://www.heise.de/developer/rss/news-atom.xml";
+	private static final String ctRSSFeed = "https://www.gamestar.de/rss/gamestar.rss";
 	private static RSSReader uniqueInstance;
 
-	private HeiseRSSReader(String url) {
-		super(url);
+	protected GameStarRSSReader(String feedUrlString) {
+		super(feedUrlString);
 	}
 
 	public static RSSReader getInstance() {
 		if (uniqueInstance == null) {
-			uniqueInstance = new HeiseRSSReader(heiseRSSFeed);
+			uniqueInstance = new GameStarRSSReader(ctRSSFeed);
 		}
 		return uniqueInstance;
 	}
