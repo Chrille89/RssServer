@@ -59,7 +59,7 @@ public class RssServerApplication extends SpringBootServletInitializer {
 	@CrossOrigin
 	@RequestMapping("/gamestar")
 	@ResponseBody
-	public List<Feed> getCtNews() {
+	public List<Feed> getGameStarNews() {
 		System.out.println("Call /ct");
 		RSSReader news = GameStarRSSReader.getInstance();
 		return news.getFeedList();
