@@ -1,6 +1,5 @@
 package de.bach.thwildau.rss.server.RssServer;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,7 +11,7 @@ public class RssServerApplicationTests {
 
 	@Test
 	public void contextLoads() {
-		Assert.assertTrue(false);
+		
 	}
 
 }

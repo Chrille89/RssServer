@@ -1,8 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: de.bach.thwildau.rss.server.RssServer.RssServerApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 3.304 s <<< FAILURE! - in de.bach.thwildau.rss.server.RssServer.RssServerApplicationTests
-contextLoads(de.bach.thwildau.rss.server.RssServer.RssServerApplicationTests)  Time elapsed: 0.218 s  <<< FAILURE!
-java.lang.AssertionError
-	at de.bach.thwildau.rss.server.RssServer.RssServerApplicationTests.contextLoads(RssServerApplicationTests.java:15)
-
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.201 s - in de.bach.thwildau.rss.server.RssServer.RssServerApplicationTests
