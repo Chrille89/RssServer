@@ -85,7 +85,7 @@
 					<tomcatUsers>war-deployer</tomcatUsers>
 					<password>maven-tomcat-plugin</password>
 					<server>maven-tomcat-war-deployment-server</server>
-					<path>/rps</path>
+					<path>/RssServer</path>
 				</configuration>
 			</plugin>
 		</plugins>
