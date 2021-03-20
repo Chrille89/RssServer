@@ -35,7 +35,7 @@ public class RssServerApplication extends SpringBootServletInitializer {
 	@RequestMapping("/")
 	@ResponseBody
 	public String test() {
-		return "Hallo Welt";
+		return "RssServerApplication is running.";
 	}
 
 	@CrossOrigin
