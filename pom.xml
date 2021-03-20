@@ -67,14 +67,14 @@
 			<version>3.0.0-M1</version>
 		</dependency>
 	</dependencies>
-
+<!--
 	<distributionManagement>
 		<repository>
 			<id>ssh-repository</id>
 			<name>RssServer</name>
 			<url>scp://root@h2857701.stratoserver.net</url>
 		</repository>
-	</distributionManagement>
+	</distributionManagement>-->
 
 	<build>
 		<pluginManagement>
