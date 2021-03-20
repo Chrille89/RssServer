@@ -81,7 +81,7 @@
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.2</version>
 				<configuration>
-					<url>http://h2857701.stratoserver:8080/manager/text</url>
+					<url>http://h2857701.stratoserver.net:8080/manager/text</url>
 					<tomcatUsers>war-deployer</tomcatUsers>
 					<password>maven-tomcat-plugin</password>
 					<server>maven-tomcat-war-deployment-server</server>
