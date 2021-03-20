@@ -68,16 +68,50 @@
 		</dependency>
 	</dependencies>
 
-	<!--
 	<distributionManagement>
 		<repository>
 			<id>ssh-repository</id>
 			<name>RssServer</name>
 			<url>scp://root@h2857701.stratoserver.net</url>
 		</repository>
-	</distributionManagement>-->
+	</distributionManagement>
 
 	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>3.0.0-M1</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>3.0.0-M1</version>
+				<executions>
+					<execution>
+						<id>deploy-file</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>deploy-file</goal>
+						</goals>
+						<configuration>
+							<repositoryId>ssh-repository</repositoryId>
+							<file>${basedir}/target/RssServer-0.0.1.war</file>
+							<url>scp://root@h2857701.stratoserver.net:/opt/jetty9/webapps</url>
+							<groupId>de.bach.thwildau.rss.server</groupId>
+							<artifactId>RssServer</artifactId>
+							<version>0.0.1</version>
+							<packaging>war</packaging>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
 		<extensions>
 			<!-- Enabling the use of SSH -->
 			<extension>
