@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>de.bach.thwildau.rss.server</groupId>
@@ -66,28 +66,5 @@
 			<artifactId>wagon-maven-plugin</artifactId>
 			<version>2.0.2</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.apache.tomcat.maven/tomcat7-maven-plugin -->
-		<dependency>
-			<groupId>org.apache.tomcat.maven</groupId>
-			<artifactId>tomcat7-maven-plugin</artifactId>
-			<version>2.2</version>
-		</dependency>
 	</dependencies>
-	<build>
-		<plugins>
-			<!-- Configure the Tomcat Maven plugin -->
-			<plugin>
-				<groupId>org.apache.tomcat.maven</groupId>
-				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>2.2</version>
-				<configuration>
-					<url>http://h2857701.stratoserver.net:8080/manager/text</url>
-					<tomcatUsers>war-deployer</tomcatUsers>
-					<password>maven-tomcat-plugin</password>
-					<server>maven-tomcat-war-deployment-server</server>
-					<path>/RssServer</path>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 </project>
