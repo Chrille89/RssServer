@@ -58,13 +58,32 @@
 			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-jetty</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.codehaus.mojo</groupId>
 			<artifactId>wagon-maven-plugin</artifactId>
 			<version>2.0.2</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.tomcat.maven/tomcat7-maven-plugin -->
+		<dependency>
+			<groupId>org.apache.tomcat.maven</groupId>
+			<artifactId>tomcat7-maven-plugin</artifactId>
+			<version>2.2</version>
+		</dependency>
 	</dependencies>
+	<build>
+		<plugins>
+			<!-- Configure the Tomcat Maven plugin -->
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<url>http://h2857701.stratoserver.net:8080/manager/text</url>
+					<username>war-deployer</username>
+					<password>maven-tomcat-plugin</password>
+					<server>maven-tomcat-war-deployment-server</server>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
+
