@@ -1,19 +1,6 @@
 package de.bach.thwildau.rss.server.operations;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Date;
 import java.util.List;
-
-import org.xml.sax.InputSource;
-
-import com.sun.syndication.feed.synd.SyndContentImpl;
-import com.sun.syndication.feed.synd.SyndEntryImpl;
-import com.sun.syndication.feed.synd.SyndFeed;
-import com.sun.syndication.io.FeedException;
-import com.sun.syndication.io.SyndFeedInput;
 
 import de.bach.thwildau.rss.server.model.Feed;
 
@@ -36,7 +23,6 @@ public class TagesschauNews extends RSSReader {
 	@Override
 	protected void loadRSSFeeds() {
 		super.loadRSSFeeds();
-
 	}
 
 	@Override
